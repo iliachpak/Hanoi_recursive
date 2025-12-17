@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ichpakov <ichpakov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/07 17:56:35 by ichpakov          #+#    #+#             */
+/*   Updated: 2025/02/08 17:37:58 by ichpakov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/hanoi.h"
 
-static int ft_clear(void)
+static void ft_clear(int floors)
 {
     int status;
     char *args[] = {"clear", NULL};
-    usleep(500000);
+    usleep(100000);
     if (fork() == 0)
     {
         if (execvp("clear", args) == -1)
@@ -13,11 +25,13 @@ static int ft_clear(void)
     }
     wait(&status);
 }
-static void last_line(void)
+
+static void last_line(int floors)
 {
     int i = 0;
+    int end = (floors * 2 + 3)*3;
 
-    while (i < 39)
+    while (i < end)
     {
         printf("#");
         i++;
@@ -25,21 +39,10 @@ static void last_line(void)
     printf("\n");
 }
 
-static void first_line(int l)
+static void display_line(int **game, int floors)
 {
     int i = 0;
-
-    while (3 > i++)
-        printf("                                       \n");
-    i = 0;
-    while (l > i++)
-        printf("      |            |            |      \n");  
-}
-
-static void display_line(int **game, int floor)
-{
-    int i = 0;
-    int j = floor;
+    int j = floors;
 
     while (--j >= 0)
     {
@@ -47,12 +50,16 @@ static void display_line(int **game, int floor)
         {
             if (game[i][j] > 0)
             {
-                n_putchar(' ', 5 - (game[i][j] - 1));
+                n_putchar(' ', floors - (game[i][j] - 1));
                 n_putchar('=', ((game[i][j] - 1) * 2) + 3);
-                n_putchar(' ', 5 - (game[i][j] - 1));
+                n_putchar(' ', floors - (game[i][j] - 1));
             }
             else 
-                printf("      |      ");
+            {
+                n_putchar(' ', floors + 1);
+                n_putchar('|', 1);
+                n_putchar(' ', floors + 1);
+            }
             i++;
         }
         i = 0;
@@ -60,10 +67,9 @@ static void display_line(int **game, int floor)
     }
 }
 
-int display_game(int **game, int floor)
+void display_game(int **game, int floors)
 {
-    // ft_clear();
-    first_line(5 - floor);
-    display_line(game, floor);
-    last_line();
+    ft_clear(floors);
+    display_line(game, floors);
+    last_line(floors);
 }

@@ -6,7 +6,7 @@
 #    By: ichpakov <ichpakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 04:13:09 by ichpakov          #+#    #+#              #
-#    Updated: 2024/05/15 16:27:59 by ichpakov         ###   ########.fr        #
+#    Updated: 2025/02/07 18:00:43 by ichpakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ HEAD =	includes/hanoi.h
 #//////////////////////////////////////////////////////////////////////////////
 
 CC = gcc
-CF = -fsanitize=address -static-libasan -g #-Wall -Werror -Wextra
+CF = #-fsanitize=address -static-libasan -g #-Wall -Werror -Wextra
 CI = -I ./includes/
 
 

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ichpakov <ichpakov@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/07 17:56:32 by ichpakov          #+#    #+#             */
+/*   Updated: 2025/02/07 18:02:22 by ichpakov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/hanoi.h"
 
-int **alloc_game(int floor)
+int **alloc_game(int floors)
 {
     int ** ret;
     int i = 0;
@@ -10,7 +22,7 @@ int **alloc_game(int floor)
         return NULL; 
     while (i <= RIGTH)
     {
-        ret[i] = malloc(floor * sizeof(int));
+        ret[i] = malloc(floors * sizeof(int));
         if (!ret[i])
             return NULL;
         i++;
@@ -18,17 +30,17 @@ int **alloc_game(int floor)
     return (ret);
 }
 
-int set_game(int **game, int floor, e_peg peg)
+void set_game(int **game, int floors, e_peg peg)
 {
     int i = 0;
     int j = 0;
 
     while (j <= RIGTH)
     {
-        while (i < floor)
+        while (i < floors)
         {
             if (j == peg)
-                game[j][i] = floor - i;
+                game[j][i] = floors - i;
             else 
                 game[j][i] = 0;
             i++;
